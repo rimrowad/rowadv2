@@ -7,6 +7,13 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "الكيانات",
+                "parameter": "Parameter",
+                "team": "Team",
+                "teamMember": "Team Member",
+                "investor": "Investor",
+                "projectFile": "Project File",
+                "projectEvent": "Project Event",
+                "project": "Project",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

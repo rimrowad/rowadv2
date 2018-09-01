@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span jhiTranslate="rowadApp.projectEvent.home.title">Project Events</span>
+        <button class="btn btn-primary float-right jh-create-entity create-project-event" [routerLink]="['/', { outlets: { popup: ['project-event-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="rowadApp.projectEvent.home.createLabel">
+            Create new Project Event
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="projectEvents">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span jhiTranslate="rowadApp.projectEvent.type">Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="creationDate"><span jhiTranslate="rowadApp.projectEvent.creationDate">Creation Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="rowadApp.projectEvent.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="project.id"><span jhiTranslate="rowadApp.projectEvent.project">Project</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.id"><span jhiTranslate="rowadApp.projectEvent.user">User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projectEvent of projectEvents ;trackBy: trackId">
+                <td><a [routerLink]="['../project-event', projectEvent.id ]">{{projectEvent.id}}</a></td>
+                <td>{{projectEvent.type}}</td>
+                <td>{{projectEvent.creationDate | date:'mediumDate'}}</td>
+                <td>{{projectEvent.description}}</td>
+                <td>
+                    <div *ngIf="projectEvent.project">
+                        <a [routerLink]="['../project', projectEvent.project?.id ]" >{{projectEvent.project?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{projectEvent.user?.id}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../project-event', projectEvent.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project-event/'+ projectEvent.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project-event/'+ projectEvent.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="projectEvents && projectEvents.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

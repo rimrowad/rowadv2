@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTeamMemberLabel" jhiTranslate="rowadApp.teamMember.home.createOrEditLabel">Create or edit a Team Member</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!teamMember.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="teamMember.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.address" for="field_address">Address</label>
+            <input type="text" class="form-control" name="address" id="field_address"
+                [(ngModel)]="teamMember.address" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.phone" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                [(ngModel)]="teamMember.phone" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.dateOfBirth" for="field_dateOfBirth">Date Of Birth</label>
+            <div class="input-group">
+                <input id="field_dateOfBirth" type="text" class="form-control" name="dateOfBirth" ngbDatepicker  #dateOfBirthDp="ngbDatepicker" [(ngModel)]="teamMember.dateOfBirth"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateOfBirthDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.diplome" for="field_diplome">Diplome</label>
+            <input type="text" class="form-control" name="diplome" id="field_diplome"
+                [(ngModel)]="teamMember.diplome" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.resume" for="field_resume">Resume</label>
+            <input type="text" class="form-control" name="resume" id="field_resume"
+                [(ngModel)]="teamMember.resume" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.team" for="field_team">Team</label>
+            <select class="form-control" id="field_team" name="team" [(ngModel)]="teamMember.team" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="teamOption.id === teamMember.team?.id ? teamMember.team : teamOption" *ngFor="let teamOption of teams; trackBy: trackTeamById">{{teamOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.teamMember.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="teamMember.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === teamMember.user?.id ? teamMember.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

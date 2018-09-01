@@ -1,0 +1,60 @@
+
+entity Parameter {
+    type String,
+    value String,
+}
+entity Team {
+    name String,
+    creationDate LocalDate,
+    shortDescription String,
+    description String
+}
+entity TeamMember {
+    address String,
+    phone String,
+    dateOfBirth LocalDate,
+    diplome String,
+    resume String
+}
+entity Investor {
+    address String,
+    phone String,
+    dateOfBirth LocalDate,
+    shortDescription String,
+    description String
+}
+entity ProjectFile {
+	name String,
+    path String,
+    type String,
+    content Blob,
+    textContent TextBlob
+}
+entity ProjectEvent {
+	type String,
+    creationDate LocalDate,
+    description String
+}
+entity Project {
+	title String,
+    shortDescription String,
+	details String,
+	rendement Double,
+    budget Double,
+    startDate LocalDate,
+    estimatedEndDate LocalDate,
+    status String,
+    cible String,
+    type String
+}
+relationship ManyToOne {
+    Project{team} to Team,
+    TeamMember{team} to Team,
+    ProjectFile{project} to Project,
+    ProjectEvent{project} to Project,
+    ProjectEvent{user} to User,
+    TeamMember{user} to User,
+    Investor{user} to User
+}
+filter all
+paginate all with pagination

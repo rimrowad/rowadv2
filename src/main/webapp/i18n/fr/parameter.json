@@ -1,0 +1,23 @@
+
+{
+    "rowadApp": {
+        "parameter" : {
+            "home": {
+                "title": "Parameters",
+                "createLabel": "Créer un nouveau Parameter",
+                "createOrEditLabel": "Créer ou éditer un Parameter"
+            },
+            "created": "Un nouveau Parameter a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Parameter avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Parameter avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Parameter {{ id }} ?"
+            },
+            "detail": {
+                "title": "Parameter"
+            },
+            "type": "Type",
+            "value": "Value"
+        }
+    }
+}

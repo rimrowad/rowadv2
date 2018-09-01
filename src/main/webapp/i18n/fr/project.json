@@ -1,0 +1,32 @@
+
+{
+    "rowadApp": {
+        "project" : {
+            "home": {
+                "title": "Projects",
+                "createLabel": "Créer un nouveau Project",
+                "createOrEditLabel": "Créer ou éditer un Project"
+            },
+            "created": "Un nouveau Project a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Project avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Project avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Project {{ id }} ?"
+            },
+            "detail": {
+                "title": "Project"
+            },
+            "title": "Title",
+            "shortDescription": "Short Description",
+            "details": "Details",
+            "rendement": "Rendement",
+            "budget": "Budget",
+            "startDate": "Start Date",
+            "estimatedEndDate": "Estimated End Date",
+            "status": "Status",
+            "cible": "Cible",
+            "type": "Type",
+            "team": "Team"
+        }
+    }
+}

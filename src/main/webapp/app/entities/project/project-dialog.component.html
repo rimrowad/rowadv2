@@ -1,0 +1,92 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProjectLabel" jhiTranslate="rowadApp.project.home.createOrEditLabel">Create or edit a Project</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!project.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="project.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="project.title" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.shortDescription" for="field_shortDescription">Short Description</label>
+            <input type="text" class="form-control" name="shortDescription" id="field_shortDescription"
+                [(ngModel)]="project.shortDescription" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.details" for="field_details">Details</label>
+            <input type="text" class="form-control" name="details" id="field_details"
+                [(ngModel)]="project.details" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.rendement" for="field_rendement">Rendement</label>
+            <input type="number" class="form-control" name="rendement" id="field_rendement"
+                [(ngModel)]="project.rendement" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.budget" for="field_budget">Budget</label>
+            <input type="number" class="form-control" name="budget" id="field_budget"
+                [(ngModel)]="project.budget" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.startDate" for="field_startDate">Start Date</label>
+            <div class="input-group">
+                <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" [(ngModel)]="project.startDate"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.estimatedEndDate" for="field_estimatedEndDate">Estimated End Date</label>
+            <div class="input-group">
+                <input id="field_estimatedEndDate" type="text" class="form-control" name="estimatedEndDate" ngbDatepicker  #estimatedEndDateDp="ngbDatepicker" [(ngModel)]="project.estimatedEndDate"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="estimatedEndDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.status" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                [(ngModel)]="project.status" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.cible" for="field_cible">Cible</label>
+            <input type="text" class="form-control" name="cible" id="field_cible"
+                [(ngModel)]="project.cible" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.type" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                [(ngModel)]="project.type" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rowadApp.project.team" for="field_team">Team</label>
+            <select class="form-control" id="field_team" name="team" [(ngModel)]="project.team" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="teamOption.id === project.team?.id ? project.team : teamOption" *ngFor="let teamOption of teams; trackBy: trackTeamById">{{teamOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

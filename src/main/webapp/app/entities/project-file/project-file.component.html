@@ -1,0 +1,83 @@
+<div>
+    <h2>
+        <span jhiTranslate="rowadApp.projectFile.home.title">Project Files</span>
+        <button class="btn btn-primary float-right jh-create-entity create-project-file" [routerLink]="['/', { outlets: { popup: ['project-file-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="rowadApp.projectFile.home.createLabel">
+            Create new Project File
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="projectFiles">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="rowadApp.projectFile.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="path"><span jhiTranslate="rowadApp.projectFile.path">Path</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span jhiTranslate="rowadApp.projectFile.type">Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="content"><span jhiTranslate="rowadApp.projectFile.content">Content</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="textContent"><span jhiTranslate="rowadApp.projectFile.textContent">Text Content</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="project.id"><span jhiTranslate="rowadApp.projectFile.project">Project</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projectFile of projectFiles ;trackBy: trackId">
+                <td><a [routerLink]="['../project-file', projectFile.id ]">{{projectFile.id}}</a></td>
+                <td>{{projectFile.name}}</td>
+                <td>{{projectFile.path}}</td>
+                <td>{{projectFile.type}}</td>
+                <td>
+                    <a *ngIf="projectFile.content" (click)="openFile(projectFile.contentContentType, projectFile.content)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="projectFile.content">{{projectFile.contentContentType}}, {{byteSize(projectFile.content)}}</span>
+                </td>
+                <td>{{projectFile.textContent}}</td>
+                <td>
+                    <div *ngIf="projectFile.project">
+                        <a [routerLink]="['../project', projectFile.project?.id ]" >{{projectFile.project?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../project-file', projectFile.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project-file/'+ projectFile.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project-file/'+ projectFile.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="projectFiles && projectFiles.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

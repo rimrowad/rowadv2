@@ -1,0 +1,27 @@
+
+{
+    "rowadApp": {
+        "projectFile" : {
+            "home": {
+                "title": "Project Files",
+                "createLabel": "Create a new Project File",
+                "createOrEditLabel": "Create or edit a Project File"
+            },
+            "created": "A new Project File is created with identifier {{ param }}",
+            "updated": "A Project File is updated with identifier {{ param }}",
+            "deleted": "A Project File is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Project File {{ id }}?"
+            },
+            "detail": {
+                "title": "Project File"
+            },
+            "name": "Name",
+            "path": "Path",
+            "type": "Type",
+            "content": "Content",
+            "textContent": "Text Content",
+            "project": "Project"
+        }
+    }
+}

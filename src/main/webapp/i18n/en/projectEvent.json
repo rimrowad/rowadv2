@@ -1,0 +1,26 @@
+
+{
+    "rowadApp": {
+        "projectEvent" : {
+            "home": {
+                "title": "Project Events",
+                "createLabel": "Create a new Project Event",
+                "createOrEditLabel": "Create or edit a Project Event"
+            },
+            "created": "A new Project Event is created with identifier {{ param }}",
+            "updated": "A Project Event is updated with identifier {{ param }}",
+            "deleted": "A Project Event is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Project Event {{ id }}?"
+            },
+            "detail": {
+                "title": "Project Event"
+            },
+            "type": "Type",
+            "creationDate": "Creation Date",
+            "description": "Description",
+            "project": "Project",
+            "user": "User"
+        }
+    }
+}

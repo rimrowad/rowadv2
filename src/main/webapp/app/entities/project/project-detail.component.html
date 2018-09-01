@@ -1,0 +1,68 @@
+
+<div *ngIf="project">
+    <h2><span jhiTranslate="rowadApp.project.detail.title">Project</span> {{project.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rowadApp.project.title">Title</span></dt>
+        <dd>
+            <span>{{project.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.shortDescription">Short Description</span></dt>
+        <dd>
+            <span>{{project.shortDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.details">Details</span></dt>
+        <dd>
+            <span>{{project.details}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.rendement">Rendement</span></dt>
+        <dd>
+            <span>{{project.rendement}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.budget">Budget</span></dt>
+        <dd>
+            <span>{{project.budget}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{project.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.estimatedEndDate">Estimated End Date</span></dt>
+        <dd>
+            <span>{{project.estimatedEndDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.status">Status</span></dt>
+        <dd>
+            <span>{{project.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.cible">Cible</span></dt>
+        <dd>
+            <span>{{project.cible}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.type">Type</span></dt>
+        <dd>
+            <span>{{project.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.project.team">Team</span></dt>
+        <dd>
+            <div *ngIf="project.team">
+                <a [routerLink]="['/team', project.team?.id]">{{project.team?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

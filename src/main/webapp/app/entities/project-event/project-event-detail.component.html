@@ -1,0 +1,44 @@
+
+<div *ngIf="projectEvent">
+    <h2><span jhiTranslate="rowadApp.projectEvent.detail.title">Project Event</span> {{projectEvent.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rowadApp.projectEvent.type">Type</span></dt>
+        <dd>
+            <span>{{projectEvent.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.projectEvent.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{projectEvent.creationDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.projectEvent.description">Description</span></dt>
+        <dd>
+            <span>{{projectEvent.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.projectEvent.project">Project</span></dt>
+        <dd>
+            <div *ngIf="projectEvent.project">
+                <a [routerLink]="['/project', projectEvent.project?.id]">{{projectEvent.project?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.projectEvent.user">User</span></dt>
+        <dd>
+            {{projectEvent.user?.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'project-event/'+ projectEvent.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

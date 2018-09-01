@@ -1,0 +1,46 @@
+
+<div *ngIf="investor">
+    <h2><span jhiTranslate="rowadApp.investor.detail.title">Investor</span> {{investor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rowadApp.investor.address">Address</span></dt>
+        <dd>
+            <span>{{investor.address}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.investor.phone">Phone</span></dt>
+        <dd>
+            <span>{{investor.phone}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.investor.dateOfBirth">Date Of Birth</span></dt>
+        <dd>
+            <span>{{investor.dateOfBirth | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.investor.shortDescription">Short Description</span></dt>
+        <dd>
+            <span>{{investor.shortDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.investor.description">Description</span></dt>
+        <dd>
+            <span>{{investor.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.investor.user">User</span></dt>
+        <dd>
+            {{investor.user?.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'investor/'+ investor.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

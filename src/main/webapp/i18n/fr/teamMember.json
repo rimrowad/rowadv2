@@ -1,0 +1,28 @@
+
+{
+    "rowadApp": {
+        "teamMember" : {
+            "home": {
+                "title": "TeamMembers",
+                "createLabel": "Créer un nouveau Team Member",
+                "createOrEditLabel": "Créer ou éditer un Team Member"
+            },
+            "created": "Un nouveau Team Member a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Team Member avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Team Member avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Team Member {{ id }} ?"
+            },
+            "detail": {
+                "title": "Team Member"
+            },
+            "address": "Address",
+            "phone": "Phone",
+            "dateOfBirth": "Date Of Birth",
+            "diplome": "Diplome",
+            "resume": "Resume",
+            "team": "Team",
+            "user": "User"
+        }
+    }
+}

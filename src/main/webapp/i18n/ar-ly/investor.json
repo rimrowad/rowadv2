@@ -1,0 +1,27 @@
+
+{
+    "rowadApp": {
+        "investor" : {
+            "home": {
+                "title": "Investors",
+                "createLabel": "Create a new Investor",
+                "createOrEditLabel": "Create or edit a Investor"
+            },
+            "created": "A new Investor is created with identifier {{ param }}",
+            "updated": "A Investor is updated with identifier {{ param }}",
+            "deleted": "A Investor is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Investor {{ id }}?"
+            },
+            "detail": {
+                "title": "Investor"
+            },
+            "address": "Address",
+            "phone": "Phone",
+            "dateOfBirth": "Date Of Birth",
+            "shortDescription": "Short Description",
+            "description": "Description",
+            "user": "User"
+        }
+    }
+}
