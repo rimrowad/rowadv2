@@ -1,13 +1,19 @@
 package mr.rowad.service;
 
-import mr.rowad.domain.Team;
-import mr.rowad.repository.TeamRepository;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import mr.rowad.domain.Team;
+import mr.rowad.domain.TeamMember;
+import mr.rowad.repository.TeamMemberRepository;
+import mr.rowad.repository.TeamRepository;
 
 
 /**
@@ -20,9 +26,11 @@ public class TeamService {
     private final Logger log = LoggerFactory.getLogger(TeamService.class);
 
     private final TeamRepository teamRepository;
+    private final TeamMemberRepository memberRepository;
 
-    public TeamService(TeamRepository teamRepository) {
+    public TeamService(TeamRepository teamRepository, TeamMemberRepository memberRepository) {
         this.teamRepository = teamRepository;
+        this.memberRepository = memberRepository;
     }
 
     /**
@@ -33,7 +41,16 @@ public class TeamService {
      */
     public Team save(Team team) {
         log.debug("Request to save Team : {}", team);
-        return teamRepository.save(team);
+        if(team.getId() == null || team.getId() <= 0) {
+            team.setCreationDate(LocalDate.now());
+
+        }
+        Team dbTeam = teamRepository.save(team);
+        List<TeamMember> list = memberRepository.findByUserIsCurrentUser();
+        TeamMember teamMember = list.get(0);
+        teamMember.setTeam(dbTeam);
+        memberRepository.save(teamMember);
+        return dbTeam;
     }
 
     /**

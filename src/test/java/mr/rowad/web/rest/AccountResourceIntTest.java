@@ -1,20 +1,22 @@
 package mr.rowad.web.rest;
 
-import mr.rowad.config.Constants;
-import mr.rowad.RowadApp;
-import mr.rowad.domain.Authority;
-import mr.rowad.domain.User;
-import mr.rowad.repository.AuthorityRepository;
-import mr.rowad.repository.UserRepository;
-import mr.rowad.security.AuthoritiesConstants;
-import mr.rowad.service.MailService;
-import mr.rowad.service.dto.UserDTO;
-import mr.rowad.web.rest.errors.ExceptionTranslator;
-import mr.rowad.web.rest.vm.KeyAndPasswordVM;
-import mr.rowad.web.rest.vm.ManagedUserVM;
-import mr.rowad.service.UserService;
-import org.apache.commons.lang3.RandomStringUtils;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,18 +32,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.Instant;
-import java.time.LocalDate;
 
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import mr.rowad.RowadApp;
+import mr.rowad.config.Constants;
+import mr.rowad.domain.Authority;
+import mr.rowad.domain.User;
+import mr.rowad.repository.AuthorityRepository;
+import mr.rowad.repository.UserRepository;
+import mr.rowad.security.AuthoritiesConstants;
+import mr.rowad.service.MailService;
+import mr.rowad.service.UserService;
+import mr.rowad.service.dto.UserDTO;
+import mr.rowad.web.rest.errors.ExceptionTranslator;
+import mr.rowad.web.rest.vm.KeyAndPasswordVM;
+import mr.rowad.web.rest.vm.ManagedUserVM;
 
 /**
  * Test class for the AccountResource REST controller.
@@ -85,15 +89,15 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, null,null);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
-        this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
+            new AccountResource(userRepository, mockUserService, mockMailService, null,null);
+        restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)
             .build();
-        this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource)
+        restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource)
             .setControllerAdvice(exceptionTranslator)
             .build();
     }

@@ -1,4 +1,4 @@
-import { BaseEntity, User } from './../../shared';
+import { BaseEntity, User } from '../../shared';
 
 export class ProjectEvent implements BaseEntity {
     constructor(

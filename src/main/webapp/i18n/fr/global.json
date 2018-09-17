@@ -8,12 +8,13 @@
             "entities": {
                 "main": "Entités",
                 "parameter": "Parameter",
-                "team": "Team",
-                "teamMember": "Team Member",
-                "investor": "Investor",
-                "projectFile": "Project File",
-                "projectEvent": "Project Event",
-                "project": "Project",
+                "team": "Equipe",
+                "teamMember": "Membres",
+                "teamInvitation": "Invitations",
+                "investor": "Investisseur",
+                "projectFile": "Fichier",
+                "projectEvent": "Evenement",
+                "project": "Projet",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -101,9 +102,13 @@
             "cancel": "Annuler",
             "edit": "Editer",
             "delete": "Supprimer",
+            "accept": "Accepter",
+            "decline": "Refuser",
             "open": "Ouvrir",
             "save": "Sauvegarder",
-            "view": "Voir"
+            "view": "Voir",
+            "next": "Suivant",
+            "precedent": "Précedent"
         },
         "detail": {
             "field": "Champs",
@@ -135,5 +140,5 @@
         "emailexists": "Email déjà utilisé !",
         "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'ID !"
     },
-    "footer": "Ceci est votre pied de page"
+    "footer": "Tous les droits sont reservés pour Rowad."
 }

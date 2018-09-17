@@ -14,7 +14,7 @@ import {
     parameterRoute,
     parameterPopupRoute,
     ParameterResolvePagingParams,
-} from './';
+} from '.';
 
 const ENTITY_STATES = [
     ...parameterRoute,

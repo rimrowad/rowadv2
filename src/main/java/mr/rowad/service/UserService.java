@@ -1,15 +1,12 @@
 package mr.rowad.service;
 
-import mr.rowad.config.CacheConfiguration;
-import mr.rowad.domain.Authority;
-import mr.rowad.domain.User;
-import mr.rowad.repository.AuthorityRepository;
-import mr.rowad.config.Constants;
-import mr.rowad.repository.UserRepository;
-import mr.rowad.security.AuthoritiesConstants;
-import mr.rowad.security.SecurityUtils;
-import mr.rowad.service.util.RandomUtil;
-import mr.rowad.service.dto.UserDTO;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +18,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import mr.rowad.config.Constants;
+import mr.rowad.domain.Authority;
+import mr.rowad.domain.User;
+import mr.rowad.repository.AuthorityRepository;
+import mr.rowad.repository.UserRepository;
+import mr.rowad.security.AuthoritiesConstants;
+import mr.rowad.security.SecurityUtils;
+import mr.rowad.service.dto.UserDTO;
+import mr.rowad.service.util.RandomUtil;
 
 /**
  * Service class for managing users.
@@ -91,11 +93,10 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password, String userType) {
 
         User newUser = new User();
-        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
-        Set<Authority> authorities = new HashSet<>();
+        newUser.setAuthorities(findUserRoles(userType));
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin());
         // new user gets initially a generated password
@@ -109,13 +110,29 @@ public class UserService {
         newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
-        authorities.add(authority);
-        newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
         log.debug("Created Information for User: {}", newUser);
         return newUser;
+    }
+
+    private Set<Authority> findUserRoles(String userType) {
+        Authority authority = null;
+        switch (userType) {
+        case "user":
+            authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+            break;
+        case "investor":
+            authority = authorityRepository.findOne(AuthoritiesConstants.NEW_INVESTOR);
+            break;
+
+        default:
+            break;
+        }
+        Set<Authority> authorities = new HashSet<>();
+        authorities.add(authority);
+        return authorities;
     }
 
     public User createUser(UserDTO userDTO) {
@@ -161,6 +178,7 @@ public class UserService {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
+                user.setProfileCompleted(true);
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 user.setEmail(email);
@@ -183,6 +201,7 @@ public class UserService {
             .findOne(userDTO.getId()))
             .map(user -> {
                 user.setLogin(userDTO.getLogin());
+                user.setProfileCompleted(userDTO.isProfileCompleted());
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
                 user.setEmail(userDTO.getEmail());

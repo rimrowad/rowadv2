@@ -62,4 +62,8 @@ export class JhiLanguageHelper {
     private updatePageDirection() {
         this.renderer.setAttribute(document.querySelector('html'), 'dir', this.findLanguageFromKeyPipe.isRTL(this.translateService.currentLang) ? 'rtl' : 'ltr');
     }
+
+    isRTL(): boolean {
+        return this.findLanguageFromKeyPipe.isRTL(this.translateService.currentLang);
+    }
 }

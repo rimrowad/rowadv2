@@ -1,6 +1,6 @@
 {
     "settings": {
-        "title": "إعدادات المستخدم ل [<b>{{username}}</b>]",
+        "title": "تعديل الإعدادات 1/2",
         "form": {
             "firstname": "الاسم الاول",
             "firstname.placeholder": "اسمك الأول",
@@ -8,6 +8,12 @@
             "lastname.placeholder": "لقبك",
             "language": "لغة",
             "button": "حفظ"
+        },
+        "member": {
+            "title": "تعديل الإعدادات 2/2"
+        },
+        "investor": {
+            "title": "تعديل الإعدادات 2/2"
         },
         "messages": {
             "error": {

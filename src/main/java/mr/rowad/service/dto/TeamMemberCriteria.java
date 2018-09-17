@@ -1,16 +1,11 @@
 package mr.rowad.service.dto;
 
 import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
+
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.LocalDateFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
-
-
-import io.github.jhipster.service.filter.LocalDateFilter;
 
 
 
@@ -40,7 +35,7 @@ public class TeamMemberCriteria implements Serializable {
 
     private LongFilter teamId;
 
-    private LongFilter userId;
+    private StringFilter userLogin;
 
     public TeamMemberCriteria() {
     }
@@ -101,12 +96,12 @@ public class TeamMemberCriteria implements Serializable {
         this.teamId = teamId;
     }
 
-    public LongFilter getUserId() {
-        return userId;
+    public StringFilter getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserId(LongFilter userId) {
-        this.userId = userId;
+    public void setUserLogin(StringFilter userLogin) {
+        this.userLogin = userLogin;
     }
 
     @Override
@@ -119,7 +114,7 @@ public class TeamMemberCriteria implements Serializable {
                 (diplome != null ? "diplome=" + diplome + ", " : "") +
                 (resume != null ? "resume=" + resume + ", " : "") +
                 (teamId != null ? "teamId=" + teamId + ", " : "") +
-                (userId != null ? "userId=" + userId + ", " : "") +
+                (userLogin != null ? "userLogin=" + userLogin + ", " : "") +
             "}";
     }
 

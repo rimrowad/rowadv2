@@ -9,7 +9,7 @@ import {
     FindLanguageFromKeyPipe,
     JhiAlertComponent,
     JhiAlertErrorComponent
-} from './';
+} from '.';
 
 @NgModule({
     imports: [

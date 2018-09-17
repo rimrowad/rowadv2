@@ -15,7 +15,7 @@ import {
     projectEventRoute,
     projectEventPopupRoute,
     ProjectEventResolvePagingParams,
-} from './';
+} from '.';
 
 const ENTITY_STATES = [
     ...projectEventRoute,

@@ -1,6 +1,6 @@
 {
     "settings": {
-        "title": "Profil de l'utilisateur [<b>{{username}}</b>]",
+        "title": "Mise à jour du profil (1/2)",
         "form": {
             "firstname": "Prénom",
             "firstname.placeholder": "Votre prénom",
@@ -8,6 +8,12 @@
             "lastname.placeholder": "Votre nom",
             "language": "Langue",
             "button": "Sauvegarder"
+        },
+        "member": {
+            "title": "Mise à jour du profil (2/2)"
+        },
+        "investor": {
+            "title": "Mise à jour du profil (2/2)"
         },
         "messages": {
             "error": {

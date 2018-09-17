@@ -14,7 +14,7 @@ import {
     teamRoute,
     teamPopupRoute,
     TeamResolvePagingParams,
-} from './';
+} from '.';
 
 const ENTITY_STATES = [
     ...teamRoute,

@@ -1,17 +1,18 @@
 package mr.rowad.service.dto;
 
-import mr.rowad.config.Constants;
+import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import mr.rowad.domain.Authority;
-import mr.rowad.domain.User;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.*;
-import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
+import mr.rowad.config.Constants;
+import mr.rowad.domain.Authority;
+import mr.rowad.domain.User;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -40,6 +41,8 @@ public class UserDTO {
 
     private boolean activated = false;
 
+    private boolean profileCompleted = false;
+
     @Size(min = 2, max = 6)
     private String langKey;
 
@@ -58,19 +61,20 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this.id = user.getId();
-        this.login = user.getLogin();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.activated = user.getActivated();
-        this.imageUrl = user.getImageUrl();
-        this.langKey = user.getLangKey();
-        this.createdBy = user.getCreatedBy();
-        this.createdDate = user.getCreatedDate();
-        this.lastModifiedBy = user.getLastModifiedBy();
-        this.lastModifiedDate = user.getLastModifiedDate();
-        this.authorities = user.getAuthorities().stream()
+        id = user.getId();
+        login = user.getLogin();
+        firstName = user.getFirstName();
+        lastName = user.getLastName();
+        email = user.getEmail();
+        activated = user.getActivated();
+        profileCompleted = user.getProfileCompleted();
+        imageUrl = user.getImageUrl();
+        langKey = user.getLangKey();
+        createdBy = user.getCreatedBy();
+        createdDate = user.getCreatedDate();
+        lastModifiedBy = user.getLastModifiedBy();
+        lastModifiedDate = user.getLastModifiedDate();
+        authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
     }
@@ -177,6 +181,14 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isProfileCompleted() {
+        return profileCompleted;
+    }
+
+    public void setProfileCompleted(boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
     }
 
     @Override

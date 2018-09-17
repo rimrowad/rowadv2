@@ -45,6 +45,7 @@ public class CacheConfiguration {
             cm.createCache(mr.rowad.domain.ProjectFile.class.getName(), jcacheConfiguration);
             cm.createCache(mr.rowad.domain.ProjectEvent.class.getName(), jcacheConfiguration);
             cm.createCache(mr.rowad.domain.Project.class.getName(), jcacheConfiguration);
+            cm.createCache(mr.rowad.domain.TeamInvitation.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

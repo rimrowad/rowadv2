@@ -7,7 +7,8 @@ import {
     passwordResetInitRoute,
     registerRoute,
     settingsRoute
-} from './';
+} from '.';
+import { settingInvestorRoute, settingMemberRoute } from './settings/settings.route';
 
 const ACCOUNT_ROUTES = [
     activateRoute,
@@ -15,6 +16,8 @@ const ACCOUNT_ROUTES = [
     passwordResetFinishRoute,
     passwordResetInitRoute,
     registerRoute,
+    settingInvestorRoute,
+    settingMemberRoute,
     settingsRoute
 ];
 

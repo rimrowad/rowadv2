@@ -1,0 +1,26 @@
+
+{
+    "rowadApp": {
+        "teamInvitation" : {
+            "home": {
+                "title": "Team Invitations",
+                "createLabel": "Create a new Team Invitation",
+                "createOrEditLabel": "Create or edit a Team Invitation"
+            },
+            "created": "A new Team Invitation is created with identifier {{ param }}",
+            "updated": "A Team Invitation is updated with identifier {{ param }}",
+            "deleted": "A Team Invitation is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Team Invitation {{ id }}?"
+            },
+            "detail": {
+                "title": "Team Invitation"
+            },
+            "status": "Status",
+            "date": "Date",
+            "sender": "Sender",
+            "receiver": "Receiver",
+            "team": "Team"
+        }
+    }
+}

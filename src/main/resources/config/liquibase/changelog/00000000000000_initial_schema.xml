@@ -35,6 +35,7 @@
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
             </column>
+            <column name="profile_completed" type="boolean" valueBoolean="false" />
             <column name="lang_key" type="varchar(6)"/>
             <column name="activation_key" type="varchar(20)"/>
             <column name="reset_key" type="varchar(20)"/>

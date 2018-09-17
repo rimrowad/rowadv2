@@ -12,11 +12,13 @@
     <include file="config/liquibase/changelog/20180901051910_added_entity_ProjectFile.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051911_added_entity_ProjectEvent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051912_added_entity_Project.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180901051908_added_entity_TeamInvitation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180901051908_added_entity_constraints_TeamMember.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051909_added_entity_constraints_Investor.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051910_added_entity_constraints_ProjectFile.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051911_added_entity_constraints_ProjectEvent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051912_added_entity_constraints_Project.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180901051908_added_entity_constraints_TeamInvitation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

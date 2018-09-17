@@ -1,26 +1,44 @@
 package mr.rowad.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
+import java.util.List;
+import java.util.Optional;
 
-import mr.rowad.domain.User;
-import mr.rowad.repository.UserRepository;
-import mr.rowad.security.SecurityUtils;
-import mr.rowad.service.MailService;
-import mr.rowad.service.UserService;
-import mr.rowad.service.dto.UserDTO;
-import mr.rowad.web.rest.errors.*;
-import mr.rowad.web.rest.vm.KeyAndPasswordVM;
-import mr.rowad.web.rest.vm.ManagedUserVM;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.*;
+import com.codahale.metrics.annotation.Timed;
+
+import mr.rowad.domain.Investor;
+import mr.rowad.domain.TeamMember;
+import mr.rowad.domain.User;
+import mr.rowad.repository.InvestorRepository;
+import mr.rowad.repository.TeamMemberRepository;
+import mr.rowad.repository.UserRepository;
+import mr.rowad.security.SecurityUtils;
+import mr.rowad.service.MailService;
+import mr.rowad.service.UserService;
+import mr.rowad.service.dto.UserDTO;
+import mr.rowad.web.rest.errors.EmailAlreadyUsedException;
+import mr.rowad.web.rest.errors.EmailNotFoundException;
+import mr.rowad.web.rest.errors.InternalServerErrorException;
+import mr.rowad.web.rest.errors.InvalidPasswordException;
+import mr.rowad.web.rest.errors.LoginAlreadyUsedException;
+import mr.rowad.web.rest.vm.InvestorUserVM;
+import mr.rowad.web.rest.vm.KeyAndPasswordVM;
+import mr.rowad.web.rest.vm.ManagedUserVM;
+import mr.rowad.web.rest.vm.MemberUserVM;
 
 /**
  * REST controller for managing the current user's account.
@@ -37,11 +55,19 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final InvestorRepository investorRepository;
 
+    private final TeamMemberRepository memberRepository;
+
+
+
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService,
+            InvestorRepository investorRepository, TeamMemberRepository memberRepository) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.investorRepository = investorRepository;
+        this.memberRepository = memberRepository;
     }
 
     /**
@@ -61,7 +87,7 @@ public class AccountResource {
         }
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(), managedUserVM.getUserType());
         mailService.sendActivationEmail(user);
     }
 
@@ -129,6 +155,90 @@ public class AccountResource {
         userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
             userDTO.getLangKey(), userDTO.getImageUrl());
    }
+    @PostMapping("/account/investor")
+    @Timed
+    public void saveInvestorAccount(@Valid @RequestBody InvestorUserVM vm) {
+        UserDTO userDTO = vm.getAccount();
+        final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userLogin))) {
+            throw new EmailAlreadyUsedException();
+        }
+        Optional<User> user = userRepository.findOneByLogin(userLogin);
+        if (!user.isPresent()) {
+            throw new InternalServerErrorException("User could not be found");
+        }
+        Investor investor = findInvestorByAccount();
+        if(investor == null) {
+            investor = createInvestor(vm.getInvestor(), user.get());
+        }
+
+        userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
+                userDTO.getLangKey(), userDTO.getImageUrl());
+    }
+    private Investor createInvestor(Investor investor, User user) {
+        investor.setUser(user);
+        return investorRepository.save(investor);
+    }
+    private TeamMember createMember(TeamMember member, User user) {
+        member.setUser(user);
+        return memberRepository.save(member);
+    }
+
+    @PostMapping("/account/member")
+    @Timed
+    public void saveMemberAccount(@Valid @RequestBody MemberUserVM vm) {
+        UserDTO userDTO = vm.getAccount();
+        final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userLogin))) {
+            throw new EmailAlreadyUsedException();
+        }
+        Optional<User> user = userRepository.findOneByLogin(userLogin);
+        if (!user.isPresent()) {
+            throw new InternalServerErrorException("User could not be found");
+        }
+        TeamMember member = findMemberByAccount();
+        if(member == null) {
+            member = createMember(vm.getMember(), user.get());
+        }
+        userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
+                userDTO.getLangKey(), userDTO.getImageUrl());
+    }
+
+    @GetMapping("/account/investor")
+    @Timed
+    public Investor getInvestorByAccount() {
+        Investor investor = findInvestorByAccount();
+        if(investor!=null) {
+            return investor;
+        }
+        return new Investor();
+    }
+    public Investor findInvestorByAccount() {
+        List<Investor> list = investorRepository.findByUserIsCurrentUser();
+        if(list!=null && !list.isEmpty()) {
+            return list.iterator().next();
+        }
+        return null;
+    }
+    public TeamMember findMemberByAccount() {
+        List<TeamMember> list = memberRepository.findByUserIsCurrentUser();
+        if(list!=null && !list.isEmpty()) {
+            return list.iterator().next();
+        }
+        return null;
+    }
+
+    @GetMapping("/account/member")
+    @Timed
+    public TeamMember getMemberByAccount() {
+        TeamMember member = findMemberByAccount();
+        if(member!=null) {
+            return member;
+        }
+        return new TeamMember();
+    }
 
     /**
      * POST  /account/change-password : changes the current user's password

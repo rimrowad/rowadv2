@@ -1,0 +1,55 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 jhiTranslate="settings.member.title"></h2>
+            <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
+                <strong>Settings saved!</strong>
+            </div>
+
+            <jhi-alert-error></jhi-alert-error>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form name="editForm" role="form" novalidate (ngSubmit)="register()" #editForm="ngForm" *ngIf="!success">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rowadApp.teamMember.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address" [(ngModel)]="teamMember.address" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rowadApp.teamMember.phone" for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone" [(ngModel)]="teamMember.phone" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rowadApp.teamMember.dateOfBirth" for="field_dateOfBirth">Date Of Birth</label>
+                    <div class="input-group">
+                        <input id="field_dateOfBirth" type="text" class="form-control" name="dateOfBirth" ngbDatepicker #dateOfBirthDp="ngbDatepicker"
+                            [(ngModel)]="teamMember.dateOfBirth" />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateOfBirthDp.toggle()">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rowadApp.teamMember.diplome" for="field_diplome">Diplome</label>
+                    <input type="text" class="form-control" name="diplome" id="field_diplome" [(ngModel)]="teamMember.diplome" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="rowadApp.teamMember.resume" for="field_resume">Resume</label>
+                    <input type="text" class="form-control" name="resume" id="field_resume" [(ngModel)]="teamMember.resume" />
+                </div>
+                <button (click)="goToPrevious()" class="btn btn-info">
+                    <span [class]="leftArrow()"></span>&nbsp;
+                    <span jhiTranslate="entity.action.precedent">Back</span>
+                </button>
+                <button type="submit" [disabled]="editForm.form.invalid" class="btn btn-primary">
+                    <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+        
+            
+            </form>
+        </div>
+    </div>
+</div>

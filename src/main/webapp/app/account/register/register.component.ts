@@ -5,6 +5,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 
 import { Register } from './register.service';
 import { LoginModalService, EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '../../shared';
+import { RegisterType } from './register-type.service';
 
 @Component({
     selector: 'jhi-register',
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         private languageService: JhiLanguageService,
         private loginModalService: LoginModalService,
         private registerService: Register,
+        private registerType: RegisterType,
         private elementRef: ElementRef,
         private renderer: Renderer
     ) {
@@ -33,6 +35,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.success = false;
         this.registerAccount = {};
+        this.registerAccount.userType = this.registerType.type;
     }
 
     ngAfterViewInit() {

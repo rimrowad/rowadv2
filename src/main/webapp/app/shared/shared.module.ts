@@ -14,7 +14,7 @@ import {
     JhiLoginModalComponent,
     Principal,
     HasAnyAuthorityDirective,
-} from './';
+} from '.';
 
 @NgModule({
     imports: [

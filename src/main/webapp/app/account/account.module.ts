@@ -17,7 +17,12 @@ import {
     PasswordResetFinishComponent,
     SettingsComponent,
     accountState
-} from './';
+} from '.';
+import { SettingCache } from './settings/setting.cache';
+import { SettingGuard } from './settings/setting.guard';
+import { SettingInvestorComponent } from './settings/setting-investor.component';
+import { SettingMemberComponent } from './settings/setting-member.component';
+import { RegisterType } from './register/register-type.service';
 
 @NgModule({
     imports: [
@@ -27,6 +32,8 @@ import {
     declarations: [
         ActivateComponent,
         RegisterComponent,
+        SettingInvestorComponent,
+        SettingMemberComponent,
         PasswordComponent,
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
@@ -35,6 +42,9 @@ import {
     ],
     providers: [
         Register,
+        RegisterType,
+        SettingCache,
+        SettingGuard,
         ActivateService,
         PasswordService,
         PasswordResetInitService,

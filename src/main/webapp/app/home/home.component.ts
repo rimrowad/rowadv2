@@ -3,6 +3,8 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal } from '../shared';
+import { RegisterType } from '../account';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-home',
@@ -19,6 +21,8 @@ export class HomeComponent implements OnInit {
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
+        private registerType: RegisterType,
+        private router: Router,
         private eventManager: JhiEventManager
     ) {
     }
@@ -36,10 +40,27 @@ export class HomeComponent implements OnInit {
                 this.account = account;
             });
         });
+        this.eventManager.subscribe('profileCompleted', (message) => {
+            this.principal.identity(true).then((account) => {
+                this.account = account;
+            });
+        });
     }
 
     isAuthenticated() {
         return this.principal.isAuthenticated();
+    }
+
+    profileCompleted(): boolean {
+        if (!this.account) {
+            return false;
+        }
+        return this.isAuthenticated() && this.account.profileCompleted;
+    }
+
+    registerAsInvestor() {
+        this.registerType.type = 'investor';
+        this.router.navigate(['/register']);
     }
 
     login() {

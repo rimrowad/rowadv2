@@ -113,6 +113,17 @@ html[dir=rtl] .input-group-prepend {
     border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 
+html[dir=rtl] .jh-navbar-align {
+    margin-right: auto!important;
+    margin-left: 0!important;
+}
+
+html[dir=rtl] .fa-rotate-270 {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
 html[dir=rtl] .input-group .form-control:not(:first-child),
 html[dir=rtl] .input-group-append,
 html[dir=rtl] .input-group-btn:not(:first-child)>.btn,

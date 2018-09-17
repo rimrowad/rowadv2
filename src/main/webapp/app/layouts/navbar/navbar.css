@@ -3,12 +3,20 @@ Navbar
 ========================================================================== */
 .navbar-version {
     font-size: 10px;
-    color: #ccc
+    color: #b0ddce
+}
+/*
+
+#28bb9c
+#279d75
+*/
+.jh-navbar {
+    background-color: #279d75;
+    padding: .2em 1em;
 }
 
-.jh-navbar {
-    background-color: #353d47;
-    padding: .2em 1em;
+.jh-navbar-align {
+    margin-left: auto!important;
 }
 
 .jh-navbar .profile-image {
@@ -19,7 +27,7 @@ Navbar
 }
 
 .jh-navbar .dropdown-item.active, .jh-navbar .dropdown-item.active:focus, .jh-navbar .dropdown-item.active:hover {
-    background-color: #353d47;
+    background-color: #279d75;
 }
 
 .jh-navbar .dropdown-toggle::after {
@@ -39,7 +47,7 @@ Navbar
 }
 
 .jh-navbar .jh-navbar-toggler {
-    color: #ccc;
+    color: #b0ddce;
     font-size: 1.5em;
     padding: 10px;
 }

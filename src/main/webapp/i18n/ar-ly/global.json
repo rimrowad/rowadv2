@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Rowad",
+        "title": "رواد",
         "browsehappy": "أنت تستخدم متصفح <strong>قديم</strong> . من فضلك <a href=\"http://browsehappy.com/?locale=en\">قم بتحديث متصفحك</a> لتحسين تجربتك.",
         "menu": {
             "home": "الصفحة الرئيسية",
@@ -8,12 +8,13 @@
             "entities": {
                 "main": "الكيانات",
                 "parameter": "Parameter",
-                "team": "Team",
-                "teamMember": "Team Member",
-                "investor": "Investor",
-                "projectFile": "Project File",
-                "projectEvent": "Project Event",
-                "project": "Project",
+                "team": "الفريق",
+                "teamMember": "أعضاء الفريق",
+                "investor": "المستثمرون",
+                "projectFile": "ملفات",
+                "projectEvent": "أحداث",
+                "teamInvitation": "دعوات",
+                "project": "المشاريع",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -59,8 +60,11 @@
                 },
                 "register": {
                     "noaccount": "لا تملك حسابا حتى الآن؟",
-                    "link": "تسجيل حساب جديد"
-                }
+                    "link": "تسجيل حساب جديد",
+                    "investor": "سجل كمستثمر"
+                },
+                "profile": "رجاءا أكمل بياناتك الشخصية لتتمكن من استخدام رواد",
+                "newInvestor": "حسابك كمستثمر لم يفعل بعد من طرف إدارة الموقع. الرجاء الانتظار"
             },
             "error": {
                 "dontmatch": "كلمة السر وتأكيدها لا تتطابق!"
@@ -101,9 +105,13 @@
             "cancel": "الغاء",
             "delete": "حذف",
             "edit": "تعديل",
+            "accept": "قبول",
+            "decline": "رفض",
             "open": "فتح",
             "save": "حفظ",
-            "view": "عرض"
+            "view": "عرض",
+            "next": "التالي",
+            "precedent": "السابق"
         },
         "detail": {
             "field": "حقل",
@@ -135,5 +143,5 @@
         "emailexists": "البريد الالكتروني قيد الاستخدام بالفعل!",
         "idexists": "{{ entityName }} جديد لا يمكن أن يكون له معرف بالفعل"
     },
-    "footer": "هنا يضع الفووتر"
+    "footer": "جميع الحقوق محفوظة لمنصة رواد"
 }

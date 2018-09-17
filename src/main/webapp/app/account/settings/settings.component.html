@@ -78,7 +78,10 @@
                         <option *ngFor="let language of languages" [value]="language">{{language | findLanguageFromKey}}</option>
                     </select>
                 </div>
-                <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
+                <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-info">
+                    <span jhiTranslate="entity.action.next">Next</span>&nbsp;
+                    <span [class]="rightArrow()"></span>
+                </button>
             </form>
         </div>
     </div>

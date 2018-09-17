@@ -14,7 +14,7 @@ import {
     projectFileRoute,
     projectFilePopupRoute,
     ProjectFileResolvePagingParams,
-} from './';
+} from '.';
 
 const ENTITY_STATES = [
     ...projectFileRoute,

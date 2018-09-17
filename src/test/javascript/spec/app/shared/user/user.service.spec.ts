@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { JhiDateUtils } from 'ng-jhipster';
 
-import { UserService, User } from './../../../../../../main/webapp/app/shared';
-import { SERVER_API_URL } from './../../../../../../main/webapp/app/app.constants';
+import { UserService, User } from '../../../../../../main/webapp/app/shared';
+import { SERVER_API_URL } from '../../../../../../main/webapp/app/app.constants';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('Service Tests', () => {

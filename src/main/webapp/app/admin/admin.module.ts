@@ -28,7 +28,7 @@ import {
     UserResolvePagingParams,
     UserResolve,
     UserModalService
-} from './';
+} from '.';
 
 @NgModule({
     imports: [

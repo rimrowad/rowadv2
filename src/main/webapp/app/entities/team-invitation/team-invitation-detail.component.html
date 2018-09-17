@@ -1,0 +1,48 @@
+
+<div *ngIf="teamInvitation">
+    <h2><span jhiTranslate="rowadApp.teamInvitation.detail.title">Team Invitation</span> {{teamInvitation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rowadApp.teamInvitation.status">Status</span></dt>
+        <dd>
+            <span>{{teamInvitation.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.teamInvitation.date">Date</span></dt>
+        <dd>
+            <span>{{teamInvitation.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.teamInvitation.sender">Sender</span></dt>
+        <dd>
+            <div *ngIf="teamInvitation.sender">
+                <a [routerLink]="['/team-member', teamInvitation.sender?.id]">{{teamInvitation.sender?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.teamInvitation.receiver">Receiver</span></dt>
+        <dd>
+            <div *ngIf="teamInvitation.receiver">
+                <a [routerLink]="['/team-member', teamInvitation.receiver?.id]">{{teamInvitation.receiver?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rowadApp.teamInvitation.team">Team</span></dt>
+        <dd>
+            <div *ngIf="teamInvitation.team">
+                <a [routerLink]="['/team', teamInvitation.team?.id]">{{teamInvitation.team?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'team-invitation/'+ teamInvitation.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

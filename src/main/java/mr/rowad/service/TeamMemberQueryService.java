@@ -1,6 +1,5 @@
 package mr.rowad.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.github.jhipster.service.QueryService;
-
+// for static metamodels
 import mr.rowad.domain.TeamMember;
-import mr.rowad.domain.*; // for static metamodels
+import mr.rowad.domain.TeamMember_;
+import mr.rowad.domain.Team_;
+import mr.rowad.domain.User_;
 import mr.rowad.repository.TeamMemberRepository;
 import mr.rowad.service.dto.TeamMemberCriteria;
 
@@ -90,8 +91,8 @@ public class TeamMemberQueryService extends QueryService<TeamMember> {
             if (criteria.getTeamId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getTeamId(), TeamMember_.team, Team_.id));
             }
-            if (criteria.getUserId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getUserId(), TeamMember_.user, User_.id));
+            if (criteria.getUserLogin() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getUserLogin(), TeamMember_.user, User_.login));
             }
         }
         return specification;

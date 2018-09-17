@@ -15,7 +15,7 @@ import {
     investorRoute,
     investorPopupRoute,
     InvestorResolvePagingParams,
-} from './';
+} from '.';
 
 const ENTITY_STATES = [
     ...investorRoute,
