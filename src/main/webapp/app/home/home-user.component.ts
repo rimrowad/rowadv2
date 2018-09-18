@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
-import { RegisterType } from '../account';
-import { Router } from '@angular/router';
+import { Account, Principal } from '../shared';
 import { TeamMemberService, TeamMember } from '../entities/team-member';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -15,18 +13,15 @@ import { Observable } from 'rxjs';
     styleUrls: [
         'home.css'
     ]
-
 })
 export class HomeUserComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     member: TeamMember;
+    events: string[] = ['teamListModification', 'teamMemberListModification'];
 
     constructor(
         private principal: Principal,
-        private loginModalService: LoginModalService,
-        private registerType: RegisterType,
-        private router: Router,
         private memberService: TeamMemberService,
         private eventManager: JhiEventManager
     ) {
@@ -57,15 +52,13 @@ export class HomeUserComponent implements OnInit {
                 this.account = account;
             });
         });
-        let list = ['teamListModification', 'teamMemberListModification'];
-        for(let item in list) {
+        this.events.forEach((item) => {
             this.eventManager.subscribe(item, (message) => {
                 this.principal.identity(true).then((account) => {
                     this.account = account;
                 });
             });
-        }
-        
+        });
     }
 
     quitTeam() {
@@ -85,6 +78,7 @@ export class HomeUserComponent implements OnInit {
 
     private onSaveError() {
     }
+
     isAuthenticated() {
         return this.principal.isAuthenticated();
     }

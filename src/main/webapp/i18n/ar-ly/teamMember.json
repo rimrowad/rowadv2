@@ -3,7 +3,7 @@
     "rowadApp": {
         "teamMember" : {
             "home": {
-                "title": "Team Members",
+                "title": "عضو فريق",
                 "createLabel": "Create a new Team Member",
                 "createOrEditLabel": "Create or edit a Team Member"
             },
@@ -14,15 +14,15 @@
                 "question": "Are you sure you want to delete Team Member {{ id }}?"
             },
             "detail": {
-                "title": "Team Member"
+                "title": "عضو فريق"
             },
-            "address": "Address",
-            "phone": "Phone",
-            "dateOfBirth": "Date Of Birth",
-            "diplome": "Diplome",
-            "resume": "Resume",
-            "team": "Team",
-            "user": "User"
+            "address": "العنوان",
+            "phone": "الهاتف",
+            "dateOfBirth": "تاريخ الميلاد",
+            "diplome": "الشهادة",
+            "resume": "سيرة ذاتية",
+            "team": "الفريق",
+            "user": "المستخدم"
         }
     }
 }

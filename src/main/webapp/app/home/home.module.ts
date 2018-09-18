@@ -6,7 +6,6 @@ import { RowadSharedModule } from '../shared';
 import { HOME_ROUTE, HomeComponent } from '.';
 import { HomeUserComponent } from './home-user.component';
 import { HomeInvestorComponent } from './home-investor.component';
-import { TeamInvitationComponent, TeamInvitationInboxComponent } from '../entities/team-invitation';
 import { RowadTeamInvitationModule } from '../entities/team-invitation/team-invitation.module';
 
 @NgModule({
@@ -18,9 +17,7 @@ import { RowadTeamInvitationModule } from '../entities/team-invitation/team-invi
     declarations: [
         HomeComponent,
         HomeUserComponent,
-        HomeInvestorComponent,
-        //TeamInvitationComponent,
-        //TeamInvitationInboxComponent
+        HomeInvestorComponent
     ],
     entryComponents: [
     ],

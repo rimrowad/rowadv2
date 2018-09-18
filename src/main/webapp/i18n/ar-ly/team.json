@@ -3,23 +3,25 @@
     "rowadApp": {
         "team" : {
             "home": {
-                "title": "Teams",
-                "createLabel": "Create a new Team",
-                "createOrEditLabel": "Create or edit a Team"
+                "title": "الفرق",
+                "createLabel": "إنشاء فريق",
+                "createOrEditLabel": "Create or edit a Team",
+                "quit": "مغادرة الفريق",
+                "member": "أنت عضو في فريق"
             },
-            "created": "A new Team is created with identifier {{ param }}",
+            "created": "تم إنشاء الفريق",
             "updated": "A Team is updated with identifier {{ param }}",
-            "deleted": "A Team is deleted with identifier {{ param }}",
+            "deleted": "تم حذف الفريق",
             "delete": {
                 "question": "Are you sure you want to delete Team {{ id }}?"
             },
             "detail": {
-                "title": "Team"
+                "title": "فريق"
             },
-            "name": "Name",
-            "creationDate": "Creation Date",
-            "shortDescription": "Short Description",
-            "description": "Description"
+            "name": "إسم الفريق",
+            "creationDate": "تاريخ الانشاء",
+            "shortDescription": "تعريف مقتضب",
+            "description": "تعريف مفصل"
         }
     }
 }

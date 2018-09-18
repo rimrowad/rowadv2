@@ -1,37 +1,23 @@
 package mr.rowad.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.codahale.metrics.annotation.Timed;
-
-import io.github.jhipster.web.util.ResponseUtil;
 import mr.rowad.domain.TeamInvitation;
-import mr.rowad.repository.TeamMemberRepository;
-import mr.rowad.service.TeamInvitationQueryService;
 import mr.rowad.service.TeamInvitationService;
-import mr.rowad.service.dto.TeamInvitationCriteria;
 import mr.rowad.web.rest.errors.BadRequestAlertException;
 import mr.rowad.web.rest.util.HeaderUtil;
-import mr.rowad.web.rest.util.PaginationUtil;
+import mr.rowad.service.dto.TeamInvitationCriteria;
+import mr.rowad.service.TeamInvitationQueryService;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing TeamInvitation.
@@ -46,16 +32,13 @@ public class TeamInvitationResource {
 
     private final TeamInvitationService teamInvitationService;
 
-    private final TeamMemberRepository memberRepository;
-
     private final TeamInvitationQueryService teamInvitationQueryService;
 
-    public TeamInvitationResource(TeamInvitationService teamInvitationService, TeamMemberRepository memberRepository,
-            TeamInvitationQueryService teamInvitationQueryService) {
+    public TeamInvitationResource(TeamInvitationService teamInvitationService, TeamInvitationQueryService teamInvitationQueryService) {
         this.teamInvitationService = teamInvitationService;
-        this.memberRepository = memberRepository;
         this.teamInvitationQueryService = teamInvitationQueryService;
     }
+
     /**
      * POST  /team-invitations : Create a new teamInvitation.
      *
@@ -74,30 +57,6 @@ public class TeamInvitationResource {
         return ResponseEntity.created(new URI("/api/team-invitations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
-    }
-    @PostMapping("/team-invitations/accept")
-    @Timed
-    public ResponseEntity<TeamInvitation> acceptTeamInvitation(@RequestBody TeamInvitation teamInvitation) throws URISyntaxException {
-        log.debug("REST request to accept TeamInvitation : {}", teamInvitation);
-        if (teamInvitation.getId() == null) {
-            return createTeamInvitation(teamInvitation);
-        }
-        TeamInvitation result = teamInvitationService.acceptTeamInvitation(teamInvitation);
-        return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, teamInvitation.getId().toString()))
-                .body(result);
-    }
-    @PostMapping("/team-invitations/decline")
-    @Timed
-    public ResponseEntity<TeamInvitation> declineTeamInvitation(@RequestBody TeamInvitation teamInvitation) throws URISyntaxException {
-        log.debug("REST request to accept TeamInvitation : {}", teamInvitation);
-        if (teamInvitation.getId() == null) {
-            return createTeamInvitation(teamInvitation);
-        }
-        TeamInvitation result = teamInvitationService.declineTeamInvitation(teamInvitation);
-        return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, teamInvitation.getId().toString()))
-                .body(result);
     }
 
     /**
@@ -125,17 +84,15 @@ public class TeamInvitationResource {
     /**
      * GET  /team-invitations : get all the teamInvitations.
      *
-     * @param pageable the pagination information
      * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of teamInvitations in body
      */
     @GetMapping("/team-invitations")
     @Timed
-    public ResponseEntity<List<TeamInvitation>> getAllTeamInvitations(TeamInvitationCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<TeamInvitation>> getAllTeamInvitations(TeamInvitationCriteria criteria) {
         log.debug("REST request to get TeamInvitations by criteria: {}", criteria);
-        Page<TeamInvitation> page = teamInvitationQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/team-invitations");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<TeamInvitation> entityList = teamInvitationQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
     }
 
     /**

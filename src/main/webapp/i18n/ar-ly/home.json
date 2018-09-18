@@ -6,6 +6,11 @@
         "logged": {
             "message": "قمت بتسجيل الدخول كمستخدم \"{{username}}\"."
         },
+        "user": {
+            "title": "بيانات الفريق",
+            "quit": "مغادرة الفريق",
+            "dashboard": "يمكنك دخول الصفحة الرئيسية الخاصة بك"
+        },
         "question": "إذا كان لديك أي سؤال حول JHipster:",
         "link": {
             "homepage": "JHipster homepage",

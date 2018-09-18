@@ -1,11 +1,10 @@
 package mr.rowad.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,9 +71,9 @@ public class TeamInvitationService {
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<TeamInvitation> findAll(Pageable pageable) {
+    public List<TeamInvitation> findAll() {
         log.debug("Request to get all TeamInvitations");
-        return teamInvitationRepository.findAll(pageable);
+        return teamInvitationRepository.findAll();
     }
 
     /**

@@ -3,24 +3,25 @@
     "rowadApp": {
         "teamInvitation" : {
             "home": {
-                "title": "Team Invitations",
-                "createLabel": "Create a new Team Invitation",
-                "createOrEditLabel": "Create or edit a Team Invitation"
+                "title": "إرسال دعوات الانضمام لفريقك",
+                "inbox": " طلبات الانضمام التي وصلتك",
+                "createLabel": "أرسل دعوة جديدة",
+                "createOrEditLabel": "إرسال دعوة"
             },
-            "created": "A new Team Invitation is created with identifier {{ param }}",
+            "created": "تمت إضافة الدعوة",
             "updated": "A Team Invitation is updated with identifier {{ param }}",
-            "deleted": "A Team Invitation is deleted with identifier {{ param }}",
+            "deleted": "تم حذف الدعوة",
             "delete": {
-                "question": "Are you sure you want to delete Team Invitation {{ id }}?"
+                "question": "هل ترغب فعلا في حذف الدعوة؟"
             },
             "detail": {
-                "title": "Team Invitation"
+                "title": "طلب انضمام"
             },
-            "status": "Status",
-            "date": "Date",
-            "sender": "Sender",
-            "receiver": "Receiver",
-            "team": "Team"
+            "status": "الحالة",
+            "date": "التاريخ",
+            "sender": "المرسل",
+            "receiver": "المرسل إليه",
+            "team": "الفريق"
         }
     }
 }

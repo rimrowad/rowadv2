@@ -12,30 +12,43 @@
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
                 <div class="alert alert-success">
-                    <span *ngIf="account" jhiTranslate="home.logged.message" translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
+                    <span *ngIf="account" jhiTranslate="home.logged.message" translateValues="{username: '{{account.login}}'}">
+                        You are logged in as user "{{account.login}}". </span>
                 </div>
                 <div *ngIf="!profileCompleted()">
-                    <a class="alert-link" routerLink="settings" jhiTranslate="global.messages.info.profile">Please complete your profile</a>
+                    <a class="alert-link" routerLink="settings" jhiTranslate="global.messages.info.profile">Please
+                        complete your profile</a>
                 </div>
                 <div *ngIf="profileCompleted()">
                     <div *jhiHasAnyAuthority="'ROLE_NEW_INVESTOR'">
                         <div class="alert alert-warning">
-                            <span jhiTranslate="global.messages.info.newInvestor">please wait your profile to be validated. Ask admin</span>
+                            <span jhiTranslate="global.messages.info.newInvestor">please wait your profile to be
+                                validated. Ask admin</span>
                         </div>
+                    </div>
+                    <div *jhiHasAnyAuthority="'ROLE_USER'">
+                        <a routerLink="home-user" jhiTranslate="home.user.dashboard">Enter you dashboard page
+                        </a>
+                    </div>
+                    <div *jhiHasAnyAuthority="'ROLE_INVESTOR'">
+                        <a routerLink="home-investor" jhiTranslate="home.user.dashboard">Enter you dashboard page
+                        </a>
                     </div>
                 </div>
             </div>
             <div *ngSwitchCase="false">
                 <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
                 <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a>
-                <br/>
+                <br />
                 <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
                 <ul>
                     <li>
-                        <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+                        <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register
+                            a new account</a>
                     </li>
                     <li>
-                        <a class="alert-link" (click)="registerAsInvestor()" jhiTranslate="global.messages.info.register.investor">Register a new account</a>
+                        <a class="alert-link" (click)="registerAsInvestor()" jhiTranslate="global.messages.info.register.investor">Register
+                            a new account</a>
                     </li>
                 </ul>
             </div>

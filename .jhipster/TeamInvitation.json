@@ -33,7 +33,6 @@
     "changelogDate": "20180901051908",
     "entityTableName": "team_invitation",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceClass",
     "jpaMetamodelFiltering": true
 }

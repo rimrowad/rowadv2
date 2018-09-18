@@ -15,26 +15,20 @@
     <div class="table-responsive" *ngIf="teamInvitations">
         <table class="table table-striped">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="status"><span jhiTranslate="rowadApp.teamInvitation.status">Status</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="date"><span jhiTranslate="rowadApp.teamInvitation.date">Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="receiver.id"><span jhiTranslate="rowadApp.teamInvitation.receiver">Receiver</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="team.name"><span jhiTranslate="rowadApp.teamInvitation.team">Team</span> <span class="fa fa-sort"></span></th>
+            <tr>
+            <th><span jhiTranslate="rowadApp.teamInvitation.date">Date</span></th>
+            <th><span jhiTranslate="rowadApp.teamInvitation.status">Status</span></th>
+            <th><span jhiTranslate="rowadApp.teamInvitation.receiver">Receiver</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let teamInvitation of teamInvitations ;trackBy: trackId">
-                <td>{{teamInvitation.status}}</td>
                 <td>{{teamInvitation.date | date:'mediumDate'}}</td>
+                <td>{{teamInvitation.status}}</td>
                 <td>
                     <div *ngIf="teamInvitation.receiver">
                         <a [routerLink]="['../team-member', teamInvitation.receiver?.id ]" >{{teamInvitation.receiver?.user.login}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="teamInvitation.team">
-                        <a [routerLink]="['../team', teamInvitation.team?.id ]" >{{teamInvitation.team?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -58,13 +52,5 @@
             </tr>
             </tbody>
         </table>
-    </div>
-    <div *ngIf="teamInvitations && teamInvitations.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-        </div>
     </div>
 </div>

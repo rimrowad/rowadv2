@@ -13,7 +13,6 @@ import {
     TeamInvitationDeleteDialogComponent,
     teamInvitationRoute,
     teamInvitationPopupRoute,
-    TeamInvitationResolvePagingParams,
 } from '.';
 import { TeamInvitationInboxComponent } from './team-invitation-inbox.component';
 
@@ -46,7 +45,6 @@ const ENTITY_STATES = [
     providers: [
         TeamInvitationService,
         TeamInvitationPopupService,
-        TeamInvitationResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
