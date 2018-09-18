@@ -35,6 +35,7 @@
       "ar-ly",
       "en",
       "fr"
-    ]
+    ],
+    "herokuDeployType": "jar"
   }
 }
