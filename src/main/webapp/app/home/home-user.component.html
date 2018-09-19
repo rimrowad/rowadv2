@@ -1,37 +1,37 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
-            <jhi-alert></jhi-alert>
+        <jhi-alert></jhi-alert>
         <h2 jhiTranslate="home.user.title">Team</h2>
-        <hr/>
+        <hr />
         <div *ngIf="hasTeam()">
-                <span  jhiTranslate="rowadApp.team.home.member">
-                </span>
-                <a [routerLink]="['../team', member.team?.id ]" >{{member.team?.name}}</a>
+            <span jhiTranslate="rowadApp.team.home.member"></span>
+            <a [routerLink]="['../team', member.team?.id ]">{{member.team?.name}}</a>
         </div>
         <div *ngIf="!hasTeam()">
-            Vous n'avez pas encore d'équipe
+            <span jhiTranslate="rowadApp.team.home.noteam"></span>
             <button class="btn btn-primary float-right jh-create-entity create-team" [routerLink]="['/', { outlets: { popup: ['team-new'] } }]">
                 <span class="fa fa-plus"></span>
-                <span  jhiTranslate="rowadApp.team.home.createLabel">
-                Create new Team
+                <span jhiTranslate="rowadApp.team.home.createLabel">
+                    Create new Team
                 </span>
             </button>
         </div>
-        <hr/>
         <div *ngIf="hasTeam()">
+            <br />
             <jhi-team-invitation></jhi-team-invitation>
         </div>
-        <hr/>
+        <br />
         <jhi-team-invitation-index></jhi-team-invitation-index>
-        <h2 jhiTranslate="home.user.quit">Quitter l'équipe</h2>
-        <hr/>
         <div *ngIf="hasTeam()">
-                <button class="btn btn-danger float-right jh-create-entity create-team" (click)="quitTeam()">
-                    <span class="fa fa-close"></span>
-                    <span  jhiTranslate="rowadApp.team.home.quit">
+            <br />
+            <h2 jhiTranslate="home.user.quit">Quitter l'équipe</h2>
+            <hr />
+            <button class="btn btn-danger float-right jh-create-entity create-team" (click)="quitTeam()">
+                <span class="fa fa-close"></span>
+                <span jhiTranslate="rowadApp.team.home.quit">
                     Quit team
-                    </span>
-                </button>
+                </span>
+            </button>
         </div>
     </div>
 </div>

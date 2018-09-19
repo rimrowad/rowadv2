@@ -7,7 +7,8 @@
                 "createLabel": "إنشاء فريق",
                 "createOrEditLabel": "Create or edit a Team",
                 "quit": "مغادرة الفريق",
-                "member": "أنت عضو في فريق"
+                "member": "أنت عضو في فريق",
+                "noteam": "لست مسجلا في أي فريق."
             },
             "created": "تم إنشاء الفريق",
             "updated": "A Team is updated with identifier {{ param }}",

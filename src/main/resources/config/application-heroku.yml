@@ -41,4 +41,4 @@ management:
 jhipster:
     mail: 
         from: rimrowad@gmail.com
-        base-url: https://rowadv-2.herokuapp.com/
+        base-url: https://rowadv-2.herokuapp.com
