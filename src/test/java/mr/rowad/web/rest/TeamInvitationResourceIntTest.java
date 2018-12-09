@@ -36,7 +36,6 @@ import mr.rowad.domain.Team;
 import mr.rowad.domain.TeamInvitation;
 import mr.rowad.domain.TeamMember;
 import mr.rowad.repository.TeamInvitationRepository;
-import mr.rowad.repository.TeamMemberRepository;
 import mr.rowad.service.TeamInvitationQueryService;
 import mr.rowad.service.TeamInvitationService;
 import mr.rowad.web.rest.errors.ExceptionTranslator;
@@ -66,9 +65,6 @@ public class TeamInvitationResourceIntTest {
     private TeamInvitationQueryService teamInvitationQueryService;
 
     @Autowired
-    private TeamMemberRepository memberRepository;
-
-    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -87,7 +83,7 @@ public class TeamInvitationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TeamInvitationResource teamInvitationResource = new TeamInvitationResource(teamInvitationService, memberRepository, teamInvitationQueryService);
+        final TeamInvitationResource teamInvitationResource = new TeamInvitationResource(teamInvitationService, teamInvitationQueryService);
         restTeamInvitationMockMvc = MockMvcBuilders.standaloneSetup(teamInvitationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
