@@ -22,7 +22,8 @@
             "name": "إسم الفريق",
             "creationDate": "تاريخ الانشاء",
             "shortDescription": "تعريف مقتضب",
-            "description": "تعريف مفصل"
+            "description": "تعريف مفصل",
+            "owner": "المدير"
         }
     }
 }

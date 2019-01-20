@@ -20,5 +20,6 @@
     <include file="config/liquibase/changelog/20180901051911_added_entity_constraints_ProjectEvent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051912_added_entity_constraints_Project.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180901051908_added_entity_constraints_TeamInvitation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180901051907_added_entity_constraints_Team.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

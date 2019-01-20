@@ -36,6 +36,8 @@ public class TeamCriteria implements Serializable {
 
     private StringFilter description;
 
+    private LongFilter ownerId;
+
     public TeamCriteria() {
     }
 
@@ -79,6 +81,14 @@ public class TeamCriteria implements Serializable {
         this.description = description;
     }
 
+    public LongFilter getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(LongFilter ownerId) {
+        this.ownerId = ownerId;
+    }
+
     @Override
     public String toString() {
         return "TeamCriteria{" +
@@ -87,6 +97,7 @@ public class TeamCriteria implements Serializable {
                 (creationDate != null ? "creationDate=" + creationDate + ", " : "") +
                 (shortDescription != null ? "shortDescription=" + shortDescription + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
+                (ownerId != null ? "ownerId=" + ownerId + ", " : "") +
             "}";
     }
 

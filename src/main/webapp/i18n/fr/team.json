@@ -19,7 +19,8 @@
             "name": "Name",
             "creationDate": "Creation Date",
             "shortDescription": "Short Description",
-            "description": "Description"
+            "description": "Description",
+            "owner" : "Créateur"
         }
     }
 }

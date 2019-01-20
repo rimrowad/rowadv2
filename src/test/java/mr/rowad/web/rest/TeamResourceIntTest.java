@@ -3,6 +3,7 @@ package mr.rowad.web.rest;
 import mr.rowad.RowadApp;
 
 import mr.rowad.domain.Team;
+import mr.rowad.domain.User;
 import mr.rowad.repository.TeamRepository;
 import mr.rowad.service.TeamService;
 import mr.rowad.web.rest.errors.ExceptionTranslator;
@@ -367,6 +368,25 @@ public class TeamResourceIntTest {
         // Get all the teamList where description is null
         defaultTeamShouldNotBeFound("description.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByOwnerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User owner = UserResourceIntTest.createEntity(em);
+        em.persist(owner);
+        em.flush();
+        team.setOwner(owner);
+        teamRepository.saveAndFlush(team);
+        Long ownerId = owner.getId();
+
+        // Get all the teamList where owner equals to ownerId
+        defaultTeamShouldBeFound("ownerId.equals=" + ownerId);
+
+        // Get all the teamList where owner equals to ownerId + 1
+        defaultTeamShouldNotBeFound("ownerId.equals=" + (ownerId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */

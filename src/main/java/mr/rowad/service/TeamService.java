@@ -27,10 +27,14 @@ public class TeamService {
 
     private final TeamRepository teamRepository;
     private final TeamMemberRepository memberRepository;
+    private final UserService userService;
 
-    public TeamService(TeamRepository teamRepository, TeamMemberRepository memberRepository) {
+
+
+    public TeamService(TeamRepository teamRepository, TeamMemberRepository memberRepository, UserService userService) {
         this.teamRepository = teamRepository;
         this.memberRepository = memberRepository;
+        this.userService = userService;
     }
 
     /**
@@ -45,7 +49,7 @@ public class TeamService {
             team.setCreationDate(LocalDate.now());
 
         }
-        Team dbTeam = teamRepository.save(team);
+        Team dbTeam = teamRepository.save(team.owner(userService.getCurrentUser().get()));
         List<TeamMember> list = memberRepository.findByUserIsCurrentUser();
         TeamMember teamMember = list.get(0);
         teamMember.setTeam(dbTeam);

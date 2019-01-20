@@ -21,6 +21,7 @@
             <th jhiSortBy="creationDate"><span jhiTranslate="rowadApp.team.creationDate">Creation Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="shortDescription"><span jhiTranslate="rowadApp.team.shortDescription">Short Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="description"><span jhiTranslate="rowadApp.team.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="owner.id"><span jhiTranslate="rowadApp.team.owner">Owner</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +32,9 @@
                 <td>{{team.creationDate | date:'mediumDate'}}</td>
                 <td>{{team.shortDescription}}</td>
                 <td>{{team.description}}</td>
+                <td>
+                    {{team.owner?.login}}
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

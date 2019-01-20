@@ -20,6 +20,10 @@
         <dd>
             <span>{{team.description}}</span>
         </dd>
+        <dt><span jhiTranslate="rowadApp.team.owner">Owner</span></dt>
+        <dd>
+            {{team.owner?.id}}
+        </dd>
     </dl>
 
     <button type="submit"

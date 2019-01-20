@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { RowadSharedModule } from '../../shared';
+import { RowadAdminModule } from '../../admin/admin.module';
 import {
     TeamService,
     TeamPopupService,
@@ -14,7 +15,7 @@ import {
     teamRoute,
     teamPopupRoute,
     TeamResolvePagingParams,
-} from '.';
+} from './';
 
 const ENTITY_STATES = [
     ...teamRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RowadSharedModule,
+        RowadAdminModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [
