@@ -7,6 +7,11 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
+                "user": "Candidate",
+                "investorMenu": "investor",
+                "investorHome": "Private page",
+                "userHome": "Private page",
+                "teamInvitationInbox": "Inbox invitations",
                 "parameter": "Parameter",
                 "team": "Team",
                 "teamMember": "Team Member",
@@ -59,8 +64,11 @@
                 },
                 "register": {
                     "noaccount": "You don't have an account yet?",
-                    "link": "Register a new account"
-                }
+                    "link": "Register a new account",
+                    "investor": "register as an investor"
+                },
+                "profile": "Please complete your registration with your personnal data to be able to use Rowad.",
+                "newInvestor": "Your account investor is not activated yet by the administration, please be patient."
             },
             "error": {
                 "dontmatch": "The password and its confirmation do not match!"

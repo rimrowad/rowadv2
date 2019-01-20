@@ -1,6 +1,7 @@
 {
     "home": {
         "title": "Bienvenue, Visiteur de Rowad !",
+        "message":"Ce site est en cours de developpement, cette page est temporaire et peut être modifié prochainement.",
         "subtitle": "Ceci est votre page d'accueil",
         "logged": {
             "message": "Vous êtes connecté en tant que \"{{username}}\"."

@@ -1,6 +1,7 @@
 {
     "home": {
         "title": "Welcome, Rowad Visitor!",
+        "message":"This web site is in build stage, This is a temporary page and may be changed soon",
         "subtitle": "This is your homepage",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
